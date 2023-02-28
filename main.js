@@ -9,6 +9,7 @@ input.setAttribute("name", "name");
 
 const select = document.createElement("ul");
 select.classList.add("select");
+select.classList.add("close");
 
 const selectData = document.createElement("div");
 selectData.classList.add("data-repo");
@@ -22,11 +23,9 @@ app.appendChild(selectData);
 input.addEventListener(
   "keyup",
   debounce(async (event) => {
-    if (event.target.value.lenght == 0) {
-      let selectItems = document.querySelectorAll(".select__item");
-      selectItems.forEach((item) => item.remove());
-    } else {
-      fetch(
+    console.log(event)
+    select.classList.toggle('close');
+    fetch(
         `https://api.github.com/search/repositories?q=${event.target.value}&per_page=5`
       ).then((response) => {
         if (response.ok) {
@@ -34,11 +33,12 @@ input.addEventListener(
           .then((data) => {
             let selectItems = document.querySelectorAll(".select__item");
             selectItems.forEach((element) => element.remove());
-
             data.items.forEach((element) => {
               let selectItems = document.createElement("li");
               selectItems.classList.add("select__item");
-
+              selectItems.textContent = element.name;
+              select.appendChild(selectItems);
+            
               selectItems.addEventListener("click", (data) => {
                 let dataRepo = document.createElement("div");
                 dataRepo.classList.add("data-repo__item");
@@ -70,15 +70,15 @@ input.addEventListener(
                   dataRepo.remove()
                 );
                 event.target.value = '';
+                select.classList.toggle('close')
               });
               
-              selectItems.textContent = element.name;
-              select.appendChild(selectItems);
+
             });
           });
         }
       });
-    }
+    
   },400)
 );
 
