@@ -26,8 +26,6 @@ input.addEventListener(
       let selectItems = document.querySelectorAll(".select__item");
       selectItems.forEach((item) => item.remove());
     } else {
-      select.innerHTML = "";
-
       fetch(
         `https://api.github.com/search/repositories?q=${event.target.value}&per_page=5`
       ).then((response) => {
@@ -61,19 +59,19 @@ input.addEventListener(
                 repoItem.appendChild(repoOwner);
                 repoItem.appendChild(repoStars);
               
-                let buttonData = document.createElement("button");
-                buttonData.classList.add("btn-data");
-                buttonData.textContent = 'X';
+                let repoButton = document.createElement("button");
+                repoButton.classList.add("btn-data");
+                repoButton.textContent = 'X';
 
                 dataRepo.appendChild(repoItem);
-                dataRepo.appendChild(buttonData);
+                dataRepo.appendChild(repoButton);
 
-                buttonData.addEventListener("click", (event) =>
+                repoButton.addEventListener("click", (event) =>
                   dataRepo.remove()
                 );
-                 
+                event.target.value = '';
               });
-
+              
               selectItems.textContent = element.name;
               select.appendChild(selectItems);
             });
