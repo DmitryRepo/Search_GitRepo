@@ -1,0 +1,59 @@
+.app {
+  background-color: #c4c4c4;
+  min-height: 48rem;
+  width: 41.25rem;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.search-input {
+  height: 3.75rem;
+  width: 31rem;
+  margin-top: 3.75rem;
+  font-size: 3rem;
+  padding-left: 1.5rem;
+}
+.select {
+  margin: 0;
+  font-size: 2rem;
+  padding: 0;
+}
+
+.select__item {
+  list-style: none;
+  padding-left: 1.5rem;
+  border: 1px solid black;
+  background-color: #e3e3e3;
+}
+.data-repo__item {
+  display: flex;
+  flex-wrap: wrap;
+  width: 32rem;
+  height: 8rem;
+  flex-direction: column;
+  align-content:space-between;
+  justify-content:center;
+  border: 1px solid black;
+  background-color: #e27beb;
+}
+.data-repo {
+  margin-top: auto;
+  margin-bottom: 33rem;
+  padding-top: 1.5rem;
+  font-size: 1.8rem;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.btn-data {
+  font-size: 3rem;
+  border: none;
+  background-color:  #e27beb;
+  border-radius: 50%;
+  width: 3rem;
+  color: red;
+  margin-right: 1rem;
+  
+}
