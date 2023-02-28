@@ -23,7 +23,6 @@ app.appendChild(selectData);
 input.addEventListener(
   "keyup",
   debounce(async (event) => {
-    console.log(event)
     select.classList.toggle('close');
     fetch(
         `https://api.github.com/search/repositories?q=${event.target.value}&per_page=5`
