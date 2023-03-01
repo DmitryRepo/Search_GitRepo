@@ -24,41 +24,43 @@ input.addEventListener(
   "keyup",
   debounce(async (event) => {
     select.classList.toggle('close');
-    fetch(
+    if(event.code !== 'Space'){
+    try{  
+    await fetch(
         `https://api.github.com/search/repositories?q=${event.target.value}&per_page=5`
       ).then((response) => {
         if (response.ok) {
           response.json()
           .then((data) => {
-            let selectItems = document.querySelectorAll(".select__item");
+            const selectItems = document.querySelectorAll(".select__item");
             selectItems.forEach((element) => element.remove());
             data.items.forEach((element) => {
-              let selectItems = document.createElement("li");
+              const selectItems = document.createElement("li");
               selectItems.classList.add("select__item");
               selectItems.textContent = element.name;
               select.appendChild(selectItems);
             
               selectItems.addEventListener("click", (data) => {
-                let dataRepo = document.createElement("div");
+                const dataRepo = document.createElement("div");
                 dataRepo.classList.add("data-repo__item");
                 selectData.appendChild(dataRepo);
 
-                let repoItem = document.createElement("ul");
+                const repoItem = document.createElement("ul");
                 repoItem.setAttribute(
                   "style",
                   "max-width:60%;list-style-type:none;"
                 ); 
-                let repoName = document.createElement("li")
+                const repoName = document.createElement("li")
                 repoName.textContent = `Name:${element.name}`
-                let repoOwner = document.createElement("li")
+                const repoOwner = document.createElement("li")
                 repoOwner.textContent = `Owner:${element.owner.login}`
-                let repoStars = document.createElement("li")
+                const repoStars = document.createElement("li")
                 repoStars.textContent = `Stars:${element.stargazers_count}`
                 repoItem.appendChild(repoName);
                 repoItem.appendChild(repoOwner);
                 repoItem.appendChild(repoStars);
               
-                let repoButton = document.createElement("button");
+                const repoButton = document.createElement("button");
                 repoButton.classList.add("btn-data");
                 repoButton.textContent = 'X';
 
@@ -77,7 +79,9 @@ input.addEventListener(
           });
         }
       });
-    
+    }catch(error){
+       console.log(error.name, error.message)
+    }}
   },400)
 );
 
