@@ -21,9 +21,6 @@
   font-size: 2rem;
   padding: 0;
 }
-.select.close{
-  display:none;
-}
 
 .select__item {
   list-style: none;
